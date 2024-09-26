@@ -21,6 +21,36 @@ class Program
             string answer = Console.ReadLine();
 
             inputNumber = int.Parse(answer);
+
+            if (inputNumber == 1)
+            {
+                PromptGenerator newGenerator = new PromptGenerator();
+                newGenerator.GetRandomPrompt();
+                string generatedPrompt = Console.ReadLine();
+
+                Entry entry1 = new Entry();
+                entry1._promptText = generatedPrompt;
+
+                Console.Write("Answer: ");
+                entry1._entryText = Console.ReadLine();
+                entry1.Display();
+            }
+
+            if (inputNumber == 2)
+            {
+
+            }
+
+            if (inputNumber == 3)
+            {
+
+            }
+
+            if (inputNumber == 4)
+            {
+
+            }
+
         }
     }
 }
