@@ -7,6 +7,8 @@ class Program
         Console.WriteLine("Welcome to the Journal Program!");
 
         int inputNumber = -1;
+        PromptGenerator newGenerator = new PromptGenerator();
+        Journal journal = new Journal();
 
         while (inputNumber != 5)
         {
@@ -20,35 +22,30 @@ class Program
             Console.Write("What would you like to do? ");
             string answer = Console.ReadLine();
 
-            inputNumber = int.Parse(answer);
+            inputNumber = int.TryParse(answer, out var number) ? number : -1;
 
             if (inputNumber == 1)
             {
-                PromptGenerator newGenerator = new PromptGenerator();
-                newGenerator.GetRandomPrompt();
-                string generatedPrompt = Console.ReadLine();
-
-                Entry entry1 = new Entry();
-                entry1._promptText = generatedPrompt;
+                string generatedPrompt = newGenerator.GetRandomPrompt();
+                Console.WriteLine(generatedPrompt);
 
                 Console.Write("Answer: ");
-                entry1._entryText = Console.ReadLine();
-                entry1.Display();
+                string entryText = Console.ReadLine();
+
+                journal.AddEntry(generatedPrompt, entryText);
             }
 
-            if (inputNumber == 2)
+            else if (inputNumber == 2)
             {
-
+                journal.DisplayAll();
             }
-
-            if (inputNumber == 3)
+            else if (inputNumber == 3)
             {
-
+                journal.LoadFromFile("journal.txt");
             }
-
-            if (inputNumber == 4)
+            else if (inputNumber == 4)
             {
-
+                journal.SaveToFile("journal.txt");
             }
 
         }
