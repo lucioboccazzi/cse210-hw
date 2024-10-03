@@ -4,12 +4,12 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
+        Console.Clear();
 
+        Console.WriteLine("Welcome to the scripture memorizer!"); 
 
+        Reference r1 = new Reference("Nephi", 3, 7);
+        Console.WriteLine(r1.GetDisplayText());  
 
-
-
-        
     }
 }
