@@ -1,45 +1,69 @@
 using System;
+using System.Collections.Generic;
 
 public class Scripture
 {
-    private string _reference;
+    private Reference _reference;  
+    private List<Word> _words = new List<Word>();  
+    private Random _rand = new Random();  
 
-//     private List<Word> _words = new()
-//     {
+    static string ScriptureText = "And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them.";
 
-//     };
+    public Scripture(Reference reference)
+    {
+        _reference = reference;
+    }
 
-//     static string ScriptureText = "And it came to pass that I, Nephi, said unto my father: I will go and do the things which the Lord hath commanded, for I know that the Lord giveth no commandments unto the children of men, save he shall prepare a way for them that they may accomplish the thing which he commandeth them."
-//     string[] scriptureWords = ScriptureText.Split(' ');
+    public class Word
+    {
+        public string Text { get; set; }
+        public bool IsHidden { get; set; }  
 
-//     public void addScriptureToList()
-//     {
-//         foreach (var word in scriptureWords)
-//         {
-//             _words.Add($"<{word}>");
-//         }
-//     }
+        public Word(string text)
+        {
+            Text = text;
+            IsHidden = false;  
+        }
+    }
 
+    public void AddScriptureToList()
+    {
+        string[] scriptureWords = ScriptureText.Split(' ');
 
-//     public Scripture (Reference reference, string text)
-//     {
-//         _reference = reference;
+        foreach (string word in scriptureWords)
+        {
+            _words.Add(new Word(word)); 
+        }
+    }
 
-        
-//     }
+    public string GetDisplayText()
+    {
+        List<string> wordList = _words.ConvertAll(word => word.Text);  
+        return string.Join(" ", wordList);  
+    }
 
-//     public int HideRandomWords()
-//     {
+    public void HideRandomWord()
+    {
+        int randomIndex;
+        do
+        {
+            randomIndex = _rand.Next(0, _words.Count); 
+        }
+        while (_words[randomIndex].IsHidden);
 
-//     }
+        _words[randomIndex].Text = "_"; 
+        _words[randomIndex].IsHidden = true; 
+    }
 
-//     public string GetDisplayText()
-//     {
-
-//     }
-
-//     public bool IsCompletelyHidden()
-//     {
-
-//     }
+    public bool IsCompletelyHidden()
+    {
+        foreach (var word in _words)
+        {
+            if (!word.IsHidden)
+            {
+                return false;
+            }
+        }
+        return true; 
+    }
 }
