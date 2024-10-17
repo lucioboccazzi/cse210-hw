@@ -57,7 +57,7 @@ public class Activity
         Console.WriteLine();
     }
 
-    public void ShowCountDown()
+    public void ShowCountDown(int _duration)
     {
         for (int i = _duration; i > 0; i--)
         {

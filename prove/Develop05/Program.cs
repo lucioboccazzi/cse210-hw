@@ -37,7 +37,8 @@ class Program
 
             else if (inputNumber == 3)
             {
-                
+                ListingActivity a3 = new ListingActivity();
+                a3.Run();
             }
 
         }

@@ -21,10 +21,10 @@ public class BreathingActivity : Activity
 
         Console.Clear();
         Console.WriteLine("Breath in...");  
-        ShowCountDown(); 
+        ShowCountDown(5); 
 
         Console.WriteLine("Breath out..."); 
-        ShowCountDown(); 
+        ShowCountDown(5); 
 
         Console.Clear();
         Console.WriteLine("Good!"); 
@@ -38,10 +38,10 @@ public class BreathingActivity : Activity
         ShowSpinner(); 
 
         Console.WriteLine("Breath in...");  
-        ShowCountDown(); 
+        ShowCountDown(5); 
 
         Console.WriteLine("Breath out..."); 
-        ShowCountDown(); 
+        ShowCountDown(5); 
 
 
         Console.Clear();

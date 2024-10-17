@@ -44,7 +44,7 @@ public class ReflectingActivity : Activity
         {
             DisplayPrompt();
 
-            Console.WriteLine("Reflect on the prompt. Press any key to proceed after a few seconds...");
+            Console.WriteLine("Reflect on the prompt...");
             ShowSpinner(3);
 
             DisplayQuestion();
