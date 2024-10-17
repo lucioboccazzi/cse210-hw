@@ -31,7 +31,8 @@ class Program
 
             else if (inputNumber == 2)
             {
-                
+                ReflectingActivity a2 = new ReflectingActivity();
+                a2.Run();
             }
 
             else if (inputNumber == 3)

@@ -1,8 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+
 public class Activity
 {
     protected string _name;
     protected string _description;
     protected int _duration;
+    protected Random _random = new Random();
 
     public Activity(string name, string description, int duration)
     {
@@ -18,8 +23,15 @@ public class Activity
         Console.Write("How long, in seconds, would you like for your session? ");
         string secondInput = Console.ReadLine();
 
-        _duration = int.Parse(secondInput);
-
+        if (int.TryParse(secondInput, out var result))
+        {
+            _duration = result;
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please enter a valid number of seconds.");
+            DisplayStartingMessage();
+        }
     }
 
     public void DisplayEndingMessage()
@@ -27,15 +39,11 @@ public class Activity
         Console.WriteLine("Excellent work! Remember to keep coming back and taking care of yourself :)");
     }
 
-    public void ShowSpinner()
+    public void ShowSpinner(int durationInSeconds = 4)
     {
-        List<string>animationStrings = new List<string>()
-        {
-            "|", "/", "-", "\\", "|", "/", "-", "\\" 
-        };
-
+        List<string> animationStrings = new List<string> { "|", "/", "-", "\\", "|", "/", "-", "\\" };
         DateTime startTime = DateTime.Now;
-        DateTime endTime = startTime.AddSeconds(4);
+        DateTime endTime = startTime.AddSeconds(durationInSeconds);
 
         while (DateTime.Now < endTime)
         {
@@ -46,19 +54,18 @@ public class Activity
                 Console.Write("\b \b");
             }
         }
+        Console.WriteLine();
     }
 
     public void ShowCountDown()
     {
-
-        for (int i = _duration; i>0; i--)
+        for (int i = _duration; i > 0; i--)
         {
             Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write(i + "/");
+            Console.Write($"{i} seconds remaining...");
             Thread.Sleep(1000);
         }
 
         Console.SetCursorPosition(0, Console.CursorTop);
     }
-
 }
