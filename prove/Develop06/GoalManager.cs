@@ -78,32 +78,50 @@ public class GoalManager
             Console.WriteLine(goal.GetStringRepresentation());
         }
     }
-
     public void CreateGoal()
     {
-        Console.WriteLine("Enter goal type (SimpleGoal):");
+        Console.WriteLine("Enter goal type (SimpleGoal, EternalGoal, ChecklistGoal):");
         string goalType = Console.ReadLine();
+
+        Console.Write("Enter the name of the goal: ");
+        string name = Console.ReadLine();
+
+        Console.Write("Enter a description: ");
+        string description = Console.ReadLine();
+
+        Console.Write("Enter the points associated with this goal: ");
+        string points = Console.ReadLine();
 
         if (goalType.Equals("SimpleGoal", StringComparison.OrdinalIgnoreCase))
         {
-            Console.Write("Enter the name of the goal: ");
-            string name = Console.ReadLine();
-
-            Console.Write("Enter a description: ");
-            string description = Console.ReadLine();
-
-            Console.Write("Enter the points associated with this goal: ");
-            string points = Console.ReadLine();
-
             SimpleGoal newGoal = new SimpleGoal(name, description, points);
             _goals.Add(newGoal);
-            Console.WriteLine("Goal created successfully!");
+        }
+        else if (goalType.Equals("EternalGoal", StringComparison.OrdinalIgnoreCase))
+        {
+            EternalGoal newGoal = new EternalGoal(name, description, points);
+            _goals.Add(newGoal);
+        }
+        else if (goalType.Equals("ChecklistGoal", StringComparison.OrdinalIgnoreCase))
+        {
+            Console.Write("Enter the target number of completions: ");
+            int target = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter the bonus points for completing the goal: ");
+            int bonus = int.Parse(Console.ReadLine());
+
+            ChecklistGoal newGoal = new ChecklistGoal(name, description, points, target, bonus);
+            _goals.Add(newGoal);
         }
         else
         {
             Console.WriteLine("Invalid goal type.");
+            return;
         }
+
+        Console.WriteLine("Goal created successfully!");
     }
+
 
     public void RecordEvent()
     {
@@ -153,6 +171,8 @@ public class GoalManager
                 _goals.Add(goal);
             }
         }
+
         Console.WriteLine("Goals loaded successfully!");
+        
     }
 }
